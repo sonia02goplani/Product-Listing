@@ -1,0 +1,35 @@
+<div class='alert alert-success' *ngIf="this.sharedService.isCompanySaved">
+  <i class="fas fa-info-circle"></i>{{alertMsg}}
+</div>
+<div class='alert alert-danger' *ngIf="hasError">
+  <i class="fas fa-info-circle"></i>{{alertErrorMsg}}
+</div>
+<div class="container">
+    <h3 class="text-center"><strong>Add Your Company</strong> </h3>
+    <form [formGroup]="addCompanyForm" class="form" >
+        <label>Company Name</label>
+        <input
+          type="text"
+          formControlName="companyName"
+          placeholder="Company Name"
+          required
+        />
+        <label>GSTIN</label>
+        <input
+          type="text"
+          formControlName="gst"
+          placeholder="GSTIN"
+          min="15"
+          max="15"
+          required
+        />
+         <button
+          type="submit"
+          value="Add Company"
+          class="btn btn-dark btn-block"
+          (click)="Submit()"
+          [disabled]="!addCompanyForm.valid"
+        >Add company</button>
+         
+      </form>
+    </div>

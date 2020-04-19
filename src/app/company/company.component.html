@@ -1,0 +1,8 @@
+<app-navbar></app-navbar>
+
+<section class="box" *ngFor=" let company of companyList">
+<div class="card text-center wd-300 ">
+       Company Name: <h1 class="text-dark">{{company.companyName}}</h1>
+       GSTIN:  <p class="text-dark">{{company.gst}}</p>
+</div>     
+</section>

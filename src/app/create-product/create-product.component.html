@@ -1,0 +1,41 @@
+<app-navbar></app-navbar>
+<div *ngIf="loading">
+    <img [src]='src/assets/spinner' alt="Loading.." style="width: 200px; margin: auto; display: block"/>
+
+</div>
+
+<div class='alert alert-success' *ngIf="isProductSaved">
+    <i class="fas fa-info-circle"></i>{{alertMsg}}
+  </div>
+  <div class='alert alert-danger' *ngIf="hasError">
+    <i class="fas fa-info-circle"></i>{{alertErrorMsg}}
+  </div>
+  <div class="container" *ngIf="!loading">
+      <h3 class="text-center"><strong>Add Product</strong> </h3>
+      <form [formGroup]="addProductForm" class="form" >
+          <label>Company Name</label>
+          <select formControlName="companyName"  *ngIf="this.companyNameList">
+            <option selected disabled>Please Select</option>
+            <option *ngFor ="let company of this.companyNameList" [value]="company">{{company}}</option>
+          </select>
+          <label>Product Name</label>
+          <input
+            type="text"
+            formControlName="productName"
+            placeholder="product Name"
+          />
+          <label>Cost</label>
+          <input
+            type="number"
+            formControlName="cost"
+            placeholder="cost"
+          />
+           <button
+            type="submit"
+            value="Add Company"
+            class="btn btn-dark btn-block"
+            (click)="addProduct()"
+          >Add Product</button>
+           
+        </form>
+      </div>

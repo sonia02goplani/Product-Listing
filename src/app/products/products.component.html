@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div>
+    <h3>Products</h3>
+                <table className="table">
+
+                    <thead className="thead-light">
+                        <tr>
+                            <th>Product name</th>
+                            <th>Cost</th>
+                            <th>CompanyName</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor= "let product of productList">
+                            <td>{{product.productName}}</td>
+                            <td>Rs.  {{product.cost}}</td>                           
+                            <td>{{product.companyName}}</td>                         
+                            <!-- <td><routerLink to={"/edit/" + props.exercise._id}>Edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>Delete</a></td> -->
+                        </tr>                    
+                    </tbody>
+                </table>
+</div>
