@@ -18,6 +18,4 @@ ngOnInit() {
    this.companyList = res;
  })
 }
-
-
 }
