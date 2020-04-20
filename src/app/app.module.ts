@@ -12,7 +12,6 @@ import {  HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreateCompanyComponent } from './create-company/create-company.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
-import { OrderSummaryComponent } from './order-summary/order-summary.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +22,6 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     NavbarComponent,
     CreateCompanyComponent,
     PlaceOrderComponent,
-    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,
