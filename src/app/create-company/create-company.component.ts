@@ -28,8 +28,8 @@ export class CreateCompanyComponent implements OnInit {
   }
   Submit() {
     let reqObj = {
-      companyName: this.addCompanyForm.get("companyName").value,
-      gst: this.addCompanyForm.get("gst").value,
+      companyName: this.addCompanyForm.get("companyName").value.toUpperCase(),
+      gst: this.addCompanyForm.get("gst").value.toUpperCase(),
     };
     this.sharedService.addCompany(reqObj).subscribe(
       (res) => {

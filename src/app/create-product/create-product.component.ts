@@ -45,7 +45,7 @@ export class CreateProductComponent implements OnInit {
   addProduct() {
     let reqObj = {
       companyName: this.addProductForm.get("companyName").value,
-      productName: this.addProductForm.get("productName").value,
+      productName: this.addProductForm.get("productName").value.toUpperCase(),
       cost: this.addProductForm.get("cost").value,
     };
     this.sharedService.addProduct(reqObj).subscribe(

@@ -33,8 +33,8 @@ export class SharedService {
     return this.http.post<Product[]>("http://localhost:5000/company/products" , reqObj)
 
   }
-  getOrders(): Observable<Order[]>{
-    return this.http.get<Order[]>("http://localhost:5000/product/orders")
+  getOrdersByYear(reqObj): Observable<Order[]>{
+    return this.http.post<Order[]>("http://localhost:5000/product/orders", reqObj)
   }
   placeOrder(reqObj): Observable<Order>{
     return this.http.post<Order>("http://localhost:5000/product/placeorder", reqObj)

@@ -15,7 +15,7 @@ companyRouter.route("/addCompany").post((req, res) => {
   const gst = req.body.gst;
   Company.find({ companyName: companyName })
     .then((company) => {
-      if (response.length) {
+      if (company.length) {
         res.status(400).send({ error: "Already Exists" });
       } else {
         const company = new Company({

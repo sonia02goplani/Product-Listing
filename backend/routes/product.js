@@ -15,10 +15,12 @@ productRouter.route("/placeorder").post((req, res) => {
   const quantity = req.body.quantity;
   const totalPrice = req.body.totalPrice;
   const orderNo = req.body.orderNo;
+  const orderYear = req.body.orderYear;
   const order = new Order({
     companyName,
     productName,
     orderNo,
+    orderYear,
     rate,
     quantity,
     totalPrice,
@@ -31,8 +33,9 @@ productRouter.route("/placeorder").post((req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
-productRouter.route("/orders").get((req, res) => {
-  Order.find()
+productRouter.route("/orders").post((req, res) => {
+    const orderYear=req.body.orderYear;
+  Order.find({orderYear: orderYear})
     .then((orders) => {
       res.json(orders);
     })

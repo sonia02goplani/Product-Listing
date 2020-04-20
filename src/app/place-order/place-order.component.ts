@@ -1,7 +1,7 @@
-import { Component, OnInit , ViewChild,ElementRef} from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { SharedService } from "../shared.service";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import jsPDF from 'jsPDF';
+import jsPDF from "jsPDF";
 
 @Component({
   selector: "app-place-order",
@@ -25,11 +25,7 @@ export class PlaceOrderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sharedService.getOrders().subscribe((res) => {
-      if (res) {
-        this.sharedService.incrementCount = res.length + 1;
-      }
-    });
+    this.getOrderByYear();
     this.getCompanies();
     this.placeOrderForm = this.formBuilder.group({
       companyName: ["", Validators.required],
@@ -71,7 +67,20 @@ export class PlaceOrderComponent implements OnInit {
   closeModal() {
     this.showModal = false;
   }
+  getOrderByYear(){
+    this.sharedService
+    .getOrdersByYear({ orderYear: new Date().getFullYear() })
+    .subscribe((res) => {
+      console.log(res.length)
+      if (res.length > 0) {
+        this.sharedService.incrementCount = res.length + 1;
+      } else {
+        this.sharedService.incrementCount = 1;
+      }
+    });
+  }
   placeOrder() {
+    this.getOrderByYear();
     let reqObj = {
       companyName: this.placeOrderForm.get("companyName").value,
       productName: this.placeOrderForm.get("productName").value,
@@ -80,6 +89,7 @@ export class PlaceOrderComponent implements OnInit {
         new Date().getFullYear() +
         "/" +
         this.sharedService.incrementCount,
+      orderYear: new Date().getFullYear(),
       rate: this.placeOrderForm.get("rate").value,
       quantity: this.placeOrderForm.get("quantity").value,
       totalPrice: this.placeOrderForm.get("totalPrice").value,
@@ -111,26 +121,24 @@ export class PlaceOrderComponent implements OnInit {
 
     console.log(reqObj.orderNo);
   }
-  @ViewChild('pdfContent', {static: false}) pdfContent: ElementRef;
-
+  @ViewChild("pdfContent", { static: false }) pdfContent: ElementRef;
 
   downloadAsPDF() {
     const doc = new jsPDF();
 
     const specialElementHandlers = {
-      '#editor': function (element, renderer) {
+      "#editor": function (element, renderer) {
         return true;
-      }
+      },
     };
 
     const pdfContent = this.pdfContent.nativeElement;
 
     doc.fromHTML(pdfContent.innerHTML, 15, 15, {
       width: 190,
-      'elementHandlers': specialElementHandlers
+      elementHandlers: specialElementHandlers,
     });
 
-    doc.save('orderSummary.pdf');
+    doc.save("orderSummary.pdf");
   }
-
 }

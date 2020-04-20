@@ -17,6 +17,10 @@ var OrderSchema = new Schema({
     type: String,
     required: true
   },
+  orderYear: {
+    type: Number,
+    required: true
+  },
   rate: {
     type: Number,
     required: true
