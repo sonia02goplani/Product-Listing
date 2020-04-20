@@ -1,79 +1,115 @@
 <app-navbar></app-navbar>
 <div *ngIf="loading">
-    <img [src]='src/assets/spinner' alt="Loading.." style="width: 200px; margin: auto; display: block"/>
-
+  <img
+    [src]="src / assets / spinner"
+    alt="Loading.."
+    style="width: 200px; margin: auto; display: block;"
+  />
 </div>
 
-<div class='alert alert-success' *ngIf="isOrderPlaced">
-    <i class="fas fa-info-circle"></i>{{alertMsg}}
-  </div>
-  <div class='alert alert-danger' *ngIf="hasError">
-    <i class="fas fa-info-circle"></i>{{alertErrorMsg}}
-  </div>
-  <div class="container">
-      <h3 class="text-center"><strong>Add Product</strong> </h3>
-      <form [formGroup]="placeOrderForm" class="form" >
-          <label>Company Name</label>
-          <select formControlName="companyName"  *ngIf="this.companyNameList" (change)="getCompanyProducts($event)">
-            <option selected disabled>Please Select</option>
-            <option *ngFor ="let company of this.companyNameList" [value]="company.companyName">{{company.companyName}}</option>
-          </select>
-          <label>Product Name</label>
-          <select formControlName="productName"  *ngIf="this.companyNameList" (change)="getProductRate($event)">
-            <option selected disabled>Please Select</option>
-            <option *ngFor ="let product of this.productNameList" [value]="product.productName">{{product.productName}}</option>
-          </select>
-          <label>Rate</label>
-          <input
-            type="number"
-            formControlName="rate"
-            placeholder="cost"
-          />
-          <label>Quantity</label>
-          <input
-            type="number"
-            formControlName="quantity"
-            placeholder="Quantity"
-            (blur)="calculateTotalPrice()"
-          />
-          <label>Total Price</label>
-          <input
-            type="number"
-            formControlName="totalPrice"
-            placeholder="Toatal Price"
-          />
-           <button
-            type="submit"
-            value="Add Company"
-            class="btn btn-dark btn-block"
-            (click)="placeOrder()"
-          >Place Order</button>
-           
-        </form>
-          <!-- Modal -->
- <div class="modale " [ngClass]="{'opened' : showModal}" aria-hidden="true" id="pdfContent" #pdfContent>
+<div class="alert alert-success" *ngIf="isOrderPlaced">
+  <i class="fas fa-info-circle"></i>{{ alertMsg }}
+</div>
+<div class="alert alert-danger" *ngIf="hasError">
+  <i class="fas fa-info-circle"></i>{{ alertErrorMsg }}
+</div>
+<div class="container">
+  <h3 class="text-center"><strong>Add Product</strong></h3>
+  <form [formGroup]="placeOrderForm" class="form">
+    <label>Company Name</label>
+    <select
+      formControlName="companyName"
+      *ngIf="this.companyNameList"
+      (change)="getCompanyProducts($event)"
+    >
+      <option selected disabled>Please Select</option>
+      <option
+        *ngFor="let company of this.companyNameList"
+        [value]="company.companyName"
+        >{{ company.companyName }}</option
+      >
+    </select>
+    <label>Product Name</label>
+    <select
+      formControlName="productName"
+      *ngIf="this.companyNameList"
+      (change)="getProductRate($event)"
+    >
+      <option selected disabled>Please Select</option>
+      <option
+        *ngFor="let product of this.productNameList"
+        [value]="product.productName"
+        >{{ product.productName }}</option
+      >
+    </select>
+    <label>Rate</label>
+    <input type="number" formControlName="rate" placeholder="cost" />
+    <label>Quantity</label>
+    <input
+      type="number"
+      formControlName="quantity"
+      placeholder="Quantity"
+      (blur)="calculateTotalPrice()"
+    />
+    <label>Total Price</label>
+    <input
+      type="number"
+      formControlName="totalPrice"
+      placeholder="Toatal Price"
+    />
+    <button
+      type="submit"
+      value="Add Company"
+      class="btn btn-dark btn-block"
+      (click)="placeOrder()"
+    >
+      Place Order
+    </button>
+  </form>
+  <!-- Modal -->
+  <div
+    class="modale"
+    [ngClass]="{ opened: showModal }"
+    aria-hidden="true"
+    id="pdfContent"
+    #pdfContent
+  >
     <div class="modal-dialog">
       <div class="modal-header">
-        <h2>Order Summary </h2>
-        <button  class="btn-close closemodale" aria-hidden="true" (click)= "closeModal()">&times;</button>
+        <h2>Order Summary</h2>
+        <button
+          class="btn-close closemodale"
+          aria-hidden="true"
+          (click)="closeModal()"
+        >
+          &times;
+        </button>
       </div>
       <div class="modal-body">
-        <p> Order No.: {{currentOrder.orderNo}}</p><br>
+        <p>Order No.: {{ currentOrder.orderNo }}</p>
+        <br />
         <section class="box">
-            <div class="card text-center wd-500">
-                   <h4 class="text-dark ">Company Name:</h4> <span class="text-dark ">{{currentOrder.companyName}}</span>
-                   <h4 class="text-dark ">Product Name:</h4> <span class="text-dark">{{currentOrder.productName}}</span>
-                   <h4 class="text-dark ">Rate:</h4> <span class="text-dark">{{currentOrder.rate}}</span>
-                   <h4 class="text-dark ">Quantity:</h4> <span class="text-dark">{{currentOrder.quantity}}</span>
-                   <p>-----------------------------------------------</p>
-                   <h4 class="text-dark ">Total Price:</h4><span class="text-dark"><strong>{{currentOrder.totalPrice}}</strong></span>
-
-            </div>     
-            </section>      
-            <div class="modal-footer">
-        <button  class="btn"  (click)="downloadAsPDF()">Save as PDF</button>
+          <div class="card text-center wd-500">
+            <h4 class="text-dark">Company Name:</h4>
+            <span class="text-dark">{{ currentOrder.companyName }}</span>
+            <h4 class="text-dark">Product Name:</h4>
+            <span class="text-dark">{{ currentOrder.productName }}</span>
+            <h4 class="text-dark">Rate:</h4>
+            <span class="text-dark">{{ currentOrder.rate }}</span>
+            <h4 class="text-dark">Quantity:</h4>
+            <span class="text-dark">{{ currentOrder.quantity }}</span>
+            <p>-----------------------------------------------</p>
+            <h4 class="text-dark">Total Price:</h4>
+            <span class="text-dark"
+              ><strong>{{ currentOrder.totalPrice }}</strong></span
+            >
+          </div>
+        </section>
+        <div class="modal-footer">
+          <button class="btn" (click)="downloadAsPDF()">Save as PDF</button>
+        </div>
       </div>
     </div>
+    <!-- /Modal -->
   </div>
-  <!-- /Modal -->
-      </div>
+</div>
