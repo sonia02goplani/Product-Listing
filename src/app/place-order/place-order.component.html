@@ -50,4 +50,30 @@
           >Place Order</button>
            
         </form>
+          <!-- Modal -->
+ <div class="modale " [ngClass]="{'opened' : showModal}" aria-hidden="true" id="pdfContent" #pdfContent>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>Order Summary </h2>
+        <button  class="btn-close closemodale" aria-hidden="true" (click)= "closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p> Order No.: {{currentOrder.orderNo}}</p><br>
+        <section class="box">
+            <div class="card text-center wd-500">
+                   <h4 class="text-dark ">Company Name:</h4> <span class="text-dark ">{{currentOrder.companyName}}</span>
+                   <h4 class="text-dark ">Product Name:</h4> <span class="text-dark">{{currentOrder.productName}}</span>
+                   <h4 class="text-dark ">Rate:</h4> <span class="text-dark">{{currentOrder.rate}}</span>
+                   <h4 class="text-dark ">Quantity:</h4> <span class="text-dark">{{currentOrder.quantity}}</span>
+                   <p>-----------------------------------------------</p>
+                   <h4 class="text-dark ">Total Price:</h4><span class="text-dark"><strong>{{currentOrder.totalPrice}}</strong></span>
+
+            </div>     
+            </section>      
+            <div class="modal-footer">
+        <button  class="btn"  (click)="downloadAsPDF()">Save as PDF</button>
+      </div>
+    </div>
+  </div>
+  <!-- /Modal -->
       </div>
