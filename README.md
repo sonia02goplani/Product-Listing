@@ -1,6 +1,15 @@
 # ProductListing
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.26.
+Application made in MEAN Stack. 
+
+Require:
+
+Node
+Express
+nodemon
+mongoose
+cors
 
 ## Development server
 
