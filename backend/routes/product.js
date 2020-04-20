@@ -33,7 +33,7 @@ productRouter.route("/placeorder").post((req, res) => {
     .catch((err) => res.status(400).json("Error" + err));
 });
 
-productRouter.route("/orders").post((req, res) => {
+productRouter.route("/orders"). post((req, res) => {
     const orderYear=req.body.orderYear;
   Order.find({orderYear: orderYear})
     .then((orders) => {
